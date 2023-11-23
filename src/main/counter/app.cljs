@@ -1,7 +1,7 @@
 (ns counter.app
   (:require ["react-dom/client" :refer [createRoot]]
-            [reagent.core :as r]
-            [reagent.dom :as rdom]))
+            [reagent.core :as r]))
+
 
 (defonce current-count (r/atom 0))
 (defonce counters (r/atom []))
@@ -10,30 +10,28 @@
   (into (subvec v 0 i) (subvec v (inc i))))
 
 (defn Counter [i counter]
-    [:div
-      counter
-      " "
-      [:button
-        {:onClick (fn [] (swap! counters update i inc))}
-        "+1"]
-      [:button
-        {:onClick (fn [] (swap! counters update i dec))}
-        "-1"]
-      [:button
-        {:onClick (fn [] (swap! counters vec-delete i))}
-        "X"]])
+  [:div
+   counter
+   " "
+   [:button
+    {:onClick (fn [] (swap! counters update i inc))}
+    "+1"]
+   [:button
+    {:onClick (fn [] (swap! counters update i dec))}
+    "-1"]
+   [:button
+    {:onClick (fn [] (swap! counters vec-delete i))}
+    "X"]])
 
 (defn Application []
   [:div
-    [:h1 "Counter"]
-      (doall
-        (for [[i counter] (map vector (range) @counters)]
-          ^{:key (str i)} [Counter i counter]))
-    [:button
-      {:onClick (fn [] (swap! counters conj 0))}
-      "Add counter"]])
-
-;(println (map vector (range) [:a :b :c :d]))
+   [:h1 "Counter"]
+   (doall
+     (for [[i counter] (map vector (range) @counters)]
+       ^{:key (str i)} [Counter i counter]))
+   [:button
+    {:onClick (fn [] (swap! counters conj 0))}
+    "Add counter"]])
 
 (defonce root (createRoot (js/document.getElementById "app")))
 
