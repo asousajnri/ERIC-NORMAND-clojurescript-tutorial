@@ -1,6 +1,7 @@
-(ns counter.app
+(ns app.core
   (:require ["react-dom/client" :refer [createRoot]]
-            [reagent.core :as r]))
+            [reagent.core :as r]
+            ["@mui/material" :as mui]))
 
 
 (defonce current-count (r/atom 0))
@@ -29,8 +30,10 @@
    (doall
      (for [[i counter] (map vector (range) @counters)]
        ^{:key (str i)} [Counter i counter]))
-   [:button
-    {:onClick (fn [] (swap! counters conj 0))}
+   [:> mui/Button
+    {:variant "contained"
+     :color "primary"
+     :onClick (fn [] (swap! counters conj 0))}
     "Add counter"]])
 
 (defonce root (createRoot (js/document.getElementById "app")))

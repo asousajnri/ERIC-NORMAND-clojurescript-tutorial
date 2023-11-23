@@ -2,10 +2,15 @@
   "name": "ERIC-NORMAND-cljs-tutorial",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "npx shadow-cljs watch app"
+  },
   "devDependencies": {
     "shadow-cljs": "2.26.2"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/lab": "^5.0.0-alpha.153",
     "@mui/material": "^5.14.18",
